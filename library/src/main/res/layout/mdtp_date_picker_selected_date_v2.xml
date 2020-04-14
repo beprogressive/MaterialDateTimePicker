@@ -21,7 +21,6 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/mdtp_date_picker_header_height"
     android:layout_weight="1"
-    android:background="@color/mdtp_accent_color"
     android:gravity="top"
     android:padding="16dp"
     android:orientation="vertical">
