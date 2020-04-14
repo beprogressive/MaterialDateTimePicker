@@ -3,6 +3,7 @@ package com.wdullaer.datetimepickerexample;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,6 +102,8 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
             dpd.vibrate(vibrateDate.isChecked());
             dpd.dismissOnPause(dismissDate.isChecked());
             dpd.showYearPickerFirst(showYearFirst.isChecked());
+            dpd.autoDismiss(true);
+            dpd.applyBlur(getActivity(), getActivity().findViewById(R.id.container), 10f);
             dpd.setVersion(showVersion2.isChecked() ? DatePickerDialog.Version.VERSION_2 : DatePickerDialog.Version.VERSION_1);
             if (modeCustomAccentDate.isChecked()) {
                 dpd.setAccentColor(Color.parseColor("#9C27B0"));
