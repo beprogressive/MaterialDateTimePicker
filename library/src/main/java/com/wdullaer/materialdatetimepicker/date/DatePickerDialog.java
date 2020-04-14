@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -52,6 +53,9 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * Dialog allowing users to select a date.
@@ -159,6 +163,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
     private String mSelectDay;
     private String mYearPickerDescription;
     private String mSelectYear;
+    public BlurView blurView;
 
     /**
      * The callback used to indicate the user is done filling in the date.
@@ -464,7 +469,24 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
 
         mHapticFeedbackController = new HapticFeedbackController(activity);
         view.findViewById(R.id.mdtp_done_background).setVisibility(mAutoDismiss ? View.GONE : View.VISIBLE);
+
+        blurView = view.findViewById(R.id.blur_view);
+
         return view;
+    }
+
+    public BlurView getBlurView() {
+        return blurView;
+    }
+
+    public void applyBlur(Activity activity, ViewGroup parent, Float blurRadius) {
+        if (blurView != null) {
+            Drawable windowBackground = activity.getWindow().getDecorView().getBackground();
+            blurView.setupWith(parent)
+                    .setFrameClearDrawable(windowBackground)
+                    .setBlurAlgorithm(new RenderScriptBlur(activity))
+                    .setBlurRadius(blurRadius);
+        }
     }
 
     @Override
