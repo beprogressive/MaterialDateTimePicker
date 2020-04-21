@@ -178,7 +178,6 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
      * @return Whether or not the view animated to the new location
      */
     public boolean goTo(MonthAdapter.CalendarDay day, boolean animate, boolean setSelected, boolean forceScroll) {
-
         // Set the selected day
         if (setSelected) {
             mSelectedDay.set(day);
@@ -354,9 +353,11 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
     }
 
     void accessibilityAnnouncePageChanged() {
-        MonthView mv = getMostVisibleMonth();
+                MonthView mv = getMostVisibleMonth();
         if (mv != null) {
+
             String monthYear = getMonthAndYearString(mv.mMonth, mv.mYear, mController.getLocale());
+            mController.onMonthSelected(mv.mYear, mv.mMonth);
             Utils.tryAccessibilityAnnounce(this, monthYear);
         } else {
             Log.w("DayPickerView", "Tried to announce before layout was initialized");

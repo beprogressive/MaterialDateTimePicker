@@ -117,6 +117,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
 
     private Calendar mCalendar = Utils.trimToMidnight(Calendar.getInstance(getTimeZone()));
     private OnDateSetListener mCallBack;
+    private OnMonthChangeListener onMonthChangeListener;
     private HashSet<OnDateChangedListener> mListeners = new HashSet<>();
     private DialogInterface.OnCancelListener mOnCancelListener;
     private DialogInterface.OnDismissListener mOnDismissListener;
@@ -167,6 +168,10 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
     private String mYearPickerDescription;
     private String mSelectYear;
     private BlurView blurView;
+
+    public interface OnMonthChangeListener {
+        void onMonthChange(int year, int month);
+    }
 
     /**
      * The callback used to indicate the user is done filling in the date.
@@ -1116,6 +1121,16 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
         updatePickers();
         setCurrentView(MONTH_AND_DAY_VIEW);
         updateDisplay(true);
+    }
+
+    public void registerOnMonthChangeListener(OnMonthChangeListener onMonthChangeListener) {
+        this.onMonthChangeListener = onMonthChangeListener;
+    }
+
+    @Override
+    public void onMonthSelected(int year, int month) {
+        if (onMonthChangeListener != null)
+            onMonthChangeListener.onMonthChange(year, month);
     }
 
     @Override

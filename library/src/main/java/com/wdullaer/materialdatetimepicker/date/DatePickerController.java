@@ -27,6 +27,8 @@ public interface DatePickerController {
 
     void onYearSelected(int year);
 
+    void onMonthSelected(int year, int month);
+
     void onDayOfMonthSelected(int year, int month, int day);
 
     void registerOnDateChangedListener(DatePickerDialog.OnDateChangedListener listener);
