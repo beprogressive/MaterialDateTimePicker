@@ -2,8 +2,11 @@ package com.wdullaer.datetimepickerexample;
 
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -140,6 +143,22 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
                 dpd = null;
             });
             dpd.show(requireFragmentManager(), "Datepickerdialog");
+
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                Calendar d = Calendar.getInstance();
+                d.set(Calendar.YEAR, 2020);
+                d.set(Calendar.MONTH, 2);
+                d.set(Calendar.DAY_OF_MONTH, 2);
+
+                Calendar d1 = Calendar.getInstance();
+                d1.set(Calendar.YEAR, 2020);
+                d1.set(Calendar.MONTH, 3);
+                d1.set(Calendar.DAY_OF_MONTH, 4);
+
+                dpd.setHighlightedDays(new Calendar[]{d, d1});
+            }, 2000);
+
         });
 
         return view;
@@ -155,12 +174,12 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
     public void onResume() {
         super.onResume();
         DatePickerDialog dpd = (DatePickerDialog) requireFragmentManager().findFragmentByTag("Datepickerdialog");
-        if(dpd != null) dpd.setOnDateSetListener(this);
+        if (dpd != null) dpd.setOnDateSetListener(this);
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        String date = "You picked the following date: " + dayOfMonth + "/" + (++monthOfYear) + "/" + year;
         dateTextView.setText(date);
         dpd = null;
     }

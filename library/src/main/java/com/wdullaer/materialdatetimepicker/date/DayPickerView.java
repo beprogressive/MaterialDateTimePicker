@@ -63,6 +63,7 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
     public interface OnPageListener {
         /**
          * Called when the visible page of the DayPickerView has changed
+         *
          * @param position the new position visible in the DayPickerView
          */
         void onPageChanged(int position);
@@ -142,12 +143,14 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
     protected void refreshAdapter() {
         if (mAdapter == null) {
             mAdapter = createMonthAdapter(mController);
+            //TODO Fix of Prev button disappearing after setting highlighted dates
+            setAdapter(mAdapter);
         } else {
             mAdapter.setSelectedDay(mSelectedDay);
             if (pageListener != null) pageListener.onPageChanged(getMostVisiblePosition());
         }
         // refresh the view with the new parameters
-        setAdapter(mAdapter);
+
     }
 
     public abstract MonthAdapter createMonthAdapter(DatePickerController controller);
@@ -258,7 +261,8 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
         return getChildAdapterPosition(getMostVisibleMonth());
     }
 
-    public @Nullable MonthView getMostVisibleMonth() {
+    public @Nullable
+    MonthView getMostVisibleMonth() {
         boolean verticalScroll = mController.getScrollOrientation() == DatePickerDialog.ScrollOrientation.VERTICAL;
         final int maxSize = verticalScroll ? getHeight() : getWidth();
         int maxDisplayedSize = 0;
@@ -353,7 +357,7 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
     }
 
     void accessibilityAnnouncePageChanged() {
-                MonthView mv = getMostVisibleMonth();
+        MonthView mv = getMostVisibleMonth();
         if (mv != null) {
 
             String monthYear = getMonthAndYearString(mv.mMonth, mv.mYear, mController.getLocale());

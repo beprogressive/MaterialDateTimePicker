@@ -81,7 +81,9 @@ public class DayPickerGroup extends ViewGroup
 
     private void updateButtonVisibility(int position) {
         final boolean isHorizontal = controller.getScrollOrientation() == DatePickerDialog.ScrollOrientation.HORIZONTAL;
-        final boolean hasPrev = position > 0;
+        //TODO Fix of Prev button disappearing after setting highlighted dates
+//        final boolean hasPrev = position > 0;
+        final boolean hasPrev = true;
         final boolean hasNext = position < (dayPickerView.getCount() - 1);
         prevButton.setVisibility(isHorizontal && hasPrev ? View.VISIBLE : View.INVISIBLE);
         nextButton.setVisibility(isHorizontal && hasNext ? View.VISIBLE : View.INVISIBLE);
