@@ -35,6 +35,8 @@
 
             <include layout="@layout/mdtp_date_picker_selected_date_v2" />
 
+            <include layout="@layout/view_progress_bar" />
+
             <include layout="@layout/mdtp_date_picker_view_animator_v2" />
         </LinearLayout>
 

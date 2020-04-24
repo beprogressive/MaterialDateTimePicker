@@ -142,7 +142,9 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
                 Log.d("DatePickerDialog", "Dialog was cancelled");
                 dpd = null;
             });
-            dpd.show(requireFragmentManager(), "Datepickerdialog");
+            dpd.show(requireFragmentManager(), "DatePickerDialog");
+
+            dpd.enableProgressBar();
 
             Handler handler = new Handler();
             handler.postDelayed(() -> {
@@ -157,7 +159,9 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
                 d1.set(Calendar.DAY_OF_MONTH, 4);
 
                 dpd.setHighlightedDays(new Calendar[]{d, d1});
-            }, 2000);
+
+                dpd.disableProgressBar();
+            }, 5000);
 
         });
 

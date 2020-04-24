@@ -36,6 +36,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -131,6 +132,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
     private TextView mYearView;
     private DayPickerGroup mDayPickerView;
     private YearPickerView mYearPickerView;
+    private ProgressBar progressBar;
 
     private int mCurrentView = UNINITIALIZED;
 
@@ -395,6 +397,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
         mSelectedDayTextView = view.findViewById(R.id.mdtp_date_picker_day);
         mYearView = view.findViewById(R.id.mdtp_date_picker_year);
         mYearView.setOnClickListener(this);
+        progressBar = view.findViewById(R.id.progress_bar);
 
         final Activity activity = requireActivity();
         mDayPickerView = new DayPickerGroup(activity, this);
@@ -508,6 +511,17 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
                     .setBlurAlgorithm(new RenderScriptBlur(activity))
                     .setBlurRadius(blurRadius);
         }
+    }
+
+    public ProgressBar enableProgressBar() {
+        if (progressBar != null)
+            progressBar.setVisibility(View.VISIBLE);
+        return progressBar;
+    }
+
+    public void disableProgressBar() {
+        if (progressBar != null)
+            progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
