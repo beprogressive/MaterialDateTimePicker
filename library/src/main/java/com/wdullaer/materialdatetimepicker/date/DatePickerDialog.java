@@ -146,6 +146,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
     private boolean mVibrate = true;
     private boolean mDismissOnPause = false;
     private boolean mAutoDismiss = false;
+    private boolean progressBarInitialEnable = false;
     private int mDefaultView = MONTH_AND_DAY_VIEW;
     private int mOkResid = R.string.mdtp_ok;
     private String mOkString;
@@ -398,6 +399,8 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
         mYearView = view.findViewById(R.id.mdtp_date_picker_year);
         mYearView.setOnClickListener(this);
         progressBar = view.findViewById(R.id.progress_bar);
+        if (progressBarInitialEnable)
+            progressBar.setVisibility(View.VISIBLE);
 
         final Activity activity = requireActivity();
         mDayPickerView = new DayPickerGroup(activity, this);
@@ -514,6 +517,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
     }
 
     public ProgressBar enableProgressBar() {
+        progressBarInitialEnable = true;
         if (progressBar != null)
             progressBar.setVisibility(View.VISIBLE);
         return progressBar;
