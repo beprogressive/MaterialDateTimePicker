@@ -142,27 +142,28 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
                 Log.d("DatePickerDialog", "Dialog was cancelled");
                 dpd = null;
             });
+
+            dpd.registerOnMonthChangeListener((year, month) -> {
+                    dpd.enableProgressBar();
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        Calendar d = Calendar.getInstance();
+                        d.set(Calendar.YEAR, 2020);
+                        d.set(Calendar.MONTH, 2);
+                        d.set(Calendar.DAY_OF_MONTH, 2);
+
+                        Calendar d1 = Calendar.getInstance();
+                        d1.set(Calendar.YEAR, 2020);
+                        d1.set(Calendar.MONTH, 3);
+                        d1.set(Calendar.DAY_OF_MONTH, 4);
+
+                        dpd.setHighlightedDays(new Calendar[]{d, d1});
+
+                        dpd.disableProgressBar();
+                    }, 5000);
+            });
             dpd.show(requireFragmentManager(), "DatePickerDialog");
-
-            dpd.enableProgressBar();
-
-            Handler handler = new Handler();
-            handler.postDelayed(() -> {
-                Calendar d = Calendar.getInstance();
-                d.set(Calendar.YEAR, 2020);
-                d.set(Calendar.MONTH, 2);
-                d.set(Calendar.DAY_OF_MONTH, 2);
-
-                Calendar d1 = Calendar.getInstance();
-                d1.set(Calendar.YEAR, 2020);
-                d1.set(Calendar.MONTH, 3);
-                d1.set(Calendar.DAY_OF_MONTH, 4);
-
-                dpd.setHighlightedDays(new Calendar[]{d, d1});
-
-                dpd.disableProgressBar();
-            }, 5000);
-
         });
 
         return view;

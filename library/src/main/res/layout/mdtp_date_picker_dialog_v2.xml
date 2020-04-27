@@ -35,7 +35,21 @@
 
             <include layout="@layout/mdtp_date_picker_selected_date_v2" />
 
-            <include layout="@layout/view_progress_bar" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="4dp">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:indeterminate="true"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
 
             <include layout="@layout/mdtp_date_picker_view_animator_v2" />
         </LinearLayout>
