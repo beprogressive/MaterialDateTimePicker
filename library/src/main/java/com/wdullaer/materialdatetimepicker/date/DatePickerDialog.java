@@ -142,6 +142,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
     private boolean mThemeDark = false;
     private boolean mThemeDarkChanged = false;
     private boolean isBlur = false;
+    private boolean disableButtons = false;
     private Integer mAccentColor = null;
     private boolean mVibrate = true;
     private boolean mDismissOnPause = false;
@@ -489,7 +490,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
         }
 
         mHapticFeedbackController = new HapticFeedbackController(activity);
-        view.findViewById(R.id.mdtp_done_background).setVisibility(mAutoDismiss ? View.GONE : View.VISIBLE);
+        view.findViewById(R.id.mdtp_done_background).setVisibility(mAutoDismiss || disableButtons ? View.GONE : View.VISIBLE);
 
         blurView = view.findViewById(R.id.blur_view);
 
@@ -499,6 +500,9 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
 
             applyBlur(getActivity(), (ViewGroup) activity.getWindow().getDecorView().getRootView(), 10f);
         }
+
+        view.findViewById(R.id.mdtp_done_background).setVisibility(disableButtons ? View.GONE : View.VISIBLE);
+
         return view;
     }
 
@@ -724,6 +728,11 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
      */
     public void setBlur(boolean isBlur) {
         this.isBlur = isBlur;
+    }
+
+    @SuppressWarnings("unused")
+    public void disableButtons(boolean disableButtons) {
+        this.disableButtons = disableButtons;
     }
 
     /**

@@ -20,7 +20,7 @@
     android:orientation="horizontal"
     android:background="@android:color/transparent"
     android:gravity="end|right"
-    android:layout_gravity="center_vertical"
+    android:layout_gravity="bottom|end"
     android:paddingBottom="8dp">
 
     <Button

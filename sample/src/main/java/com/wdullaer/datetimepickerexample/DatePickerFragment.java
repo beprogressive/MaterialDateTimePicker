@@ -105,6 +105,7 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
             dpd.dismissOnPause(dismissDate.isChecked());
             dpd.showYearPickerFirst(showYearFirst.isChecked());
             dpd.autoDismiss(true);
+            dpd.disableButtons(false);
             dpd.setBlur(true);
             dpd.setVersion(showVersion2.isChecked() ? DatePickerDialog.Version.VERSION_2 : DatePickerDialog.Version.VERSION_1);
             if (modeCustomAccentDate.isChecked()) {
@@ -144,24 +145,27 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
             });
 
             dpd.registerOnMonthChangeListener((year, month) -> {
+                if (dpd != null)
                     dpd.enableProgressBar();
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(() -> {
-                        Calendar d = Calendar.getInstance();
-                        d.set(Calendar.YEAR, 2020);
-                        d.set(Calendar.MONTH, 2);
-                        d.set(Calendar.DAY_OF_MONTH, 2);
+                Handler handler = new Handler();
+                handler.postDelayed(() -> {
+                    Calendar d = Calendar.getInstance();
+                    d.set(Calendar.YEAR, 2020);
+                    d.set(Calendar.MONTH, 2);
+                    d.set(Calendar.DAY_OF_MONTH, 2);
 
-                        Calendar d1 = Calendar.getInstance();
-                        d1.set(Calendar.YEAR, 2020);
-                        d1.set(Calendar.MONTH, 3);
-                        d1.set(Calendar.DAY_OF_MONTH, 4);
+                    Calendar d1 = Calendar.getInstance();
+                    d1.set(Calendar.YEAR, 2020);
+                    d1.set(Calendar.MONTH, 3);
+                    d1.set(Calendar.DAY_OF_MONTH, 4);
 
+                    if (dpd != null)
                         dpd.setHighlightedDays(new Calendar[]{d, d1});
 
+                    if (dpd != null)
                         dpd.disableProgressBar();
-                    }, 5000);
+                }, 5000);
             });
             dpd.show(requireFragmentManager(), "DatePickerDialog");
         });
