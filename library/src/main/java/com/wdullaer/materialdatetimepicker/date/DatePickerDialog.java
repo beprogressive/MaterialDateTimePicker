@@ -1167,9 +1167,10 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
         mCalendar.set(Calendar.DAY_OF_MONTH, day);
         updatePickers();
         updateDisplay(true);
-        if (mAutoDismiss) {
+        if (mAutoDismiss || disableButtons) {
             notifyOnDateListener();
-            dismiss();
+            if (mAutoDismiss)
+                dismiss();
         }
     }
 
