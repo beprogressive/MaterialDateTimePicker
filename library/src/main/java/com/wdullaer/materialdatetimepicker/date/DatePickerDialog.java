@@ -1148,6 +1148,7 @@ public class DatePickerDialog extends AppCompatDialogFragment implements
         updatePickers();
         setCurrentView(MONTH_AND_DAY_VIEW);
         updateDisplay(true);
+        onMonthSelected(year, mCalendar.get(Calendar.MONTH));
     }
 
     public void registerOnMonthChangeListener(OnMonthChangeListener onMonthChangeListener) {
